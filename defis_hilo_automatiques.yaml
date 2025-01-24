@@ -153,7 +153,11 @@ triggers:
   - trigger: state
     entity_id:
       - !input default_challenge_entity
-    to: "pre-cold"
+    to: 
+      - "pre-cold"
+      - "appreciation"
+      - "pre-heat"
+      - "reduction"
 
 #trigger:
 #  - platform: time_pattern
