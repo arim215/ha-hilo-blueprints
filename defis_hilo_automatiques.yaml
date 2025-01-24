@@ -149,7 +149,7 @@ triggers:
   - trigger: time_pattern
     hours: "*"
     minutes: "0"
-    seconds: "10"
+    seconds: "15"
   - trigger: state
     entity_id:
       - !input default_challenge_entity
@@ -158,10 +158,6 @@ triggers:
       - "appreciation"
       - "pre_heat"
       - "reduction"
-
-#trigger:
-#  - platform: time_pattern
-#    minutes: /1
 
 variables:
   do_pre_heat: !input do_pre_heat
