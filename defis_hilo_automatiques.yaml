@@ -149,7 +149,7 @@ triggers:
   - trigger: time_pattern
     hours: "*"
     minutes: "0"
-    seconds: "15"
+    seconds: "30"
   - trigger: state
     entity_id:
       - !input default_challenge_entity
