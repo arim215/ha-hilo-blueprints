@@ -152,16 +152,11 @@ triggers:
     seconds: "30"
   - trigger: state
     entity_id: !input default_challenge_entity
-    to: 'pre_cold'
-  - trigger: state
-    entity_id: !input default_challenge_entity
-    to: 'appreciation'
-  - trigger: state
-    entity_id: !input default_challenge_entity
-    to: 'pre_heat'
-  - trigger: state
-    entity_id: !input default_challenge_entity
-    to: "reduction"
+    to: 
+      - "pre_cold"
+      - "appreciation"
+      - "pre_heat"
+      - "reduction"
   #- trigger: template
   #  value_template: "{{ states('!input default_challenge_entity') in ['pre_heat','pre_cold','reduction','appreciation'] }}"
 
