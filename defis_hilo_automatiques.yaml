@@ -154,10 +154,10 @@ triggers:
     entity_id:
       - !input default_challenge_entity
     to: 
-      - 'pre_cold'
-      - 'appreciation'
-      - 'pre_heat'
-      - 'reduction'
+      - '"pre_cold"'
+      - '"appreciation"'
+      - '"pre_heat"'
+      - '"reduction"'
 
 variables:
   do_pre_heat: !input do_pre_heat
