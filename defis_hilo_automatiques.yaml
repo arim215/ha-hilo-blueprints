@@ -150,20 +150,20 @@ triggers:
     hours: "*"
     minutes: "0"
     seconds: "30"
-  #- trigger: state
-  #  entity_id: !input default_challenge_entity
-  #  to: "pre_cold"
-  #- trigger: state
-  #  entity_id: !input default_challenge_entity
-  #  to: "appreciation"
-  #- trigger: state
-  #  entity_id: !input default_challenge_entity
-  #  to: "pre_heat"
-  #- trigger: state
-  #  entity_id: !input default_challenge_entity
-  #  to: "reduction"
-  - trigger: template
-    value_template: "{{ states('!input default_challenge_entity') in ['pre_heat','pre_cold','reduction','appreciation'] }}"
+  - trigger: state
+    entity_id: !input default_challenge_entity
+    to: 'pre_cold'
+  - trigger: state
+    entity_id: !input default_challenge_entity
+    to: 'appreciation'
+  - trigger: state
+    entity_id: !input default_challenge_entity
+    to: 'pre_heat'
+  - trigger: state
+    entity_id: !input default_challenge_entity
+    to: "reduction"
+  #- trigger: template
+  #  value_template: "{{ states('!input default_challenge_entity') in ['pre_heat','pre_cold','reduction','appreciation'] }}"
 
 variables:
   do_pre_heat: !input do_pre_heat
