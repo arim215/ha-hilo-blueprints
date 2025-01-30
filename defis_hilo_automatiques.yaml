@@ -163,7 +163,7 @@ triggers:
   #  entity_id: !input default_challenge_entity
   #  to: "reduction"
   - trigger: template
-    value_template: "{{ states(!input default_challenge_entity) in ['pre_heat','pre_cold','reduction','appreciation'] }}"
+    value_template: "{{ states('!input default_challenge_entity') in ['pre_heat','pre_cold','reduction','appreciation'] }}"
 
 variables:
   do_pre_heat: !input do_pre_heat
