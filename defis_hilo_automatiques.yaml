@@ -164,7 +164,7 @@ blueprint:
           max: 25
           unit_of_measurement: °C
 
-    bool_climate:
+    bool_challenge_temp:
       name: Eteindre les thermostats durant défis
       description: Désactive les thermostats durant la phase de réducition au lieu de réduire la température (True)
       default: false
@@ -183,8 +183,7 @@ triggers:
       - "appreciation"
       - "pre_heat"
       - "reduction"
-  #- trigger: template
-  #  value_template: "{{ states('!input default_challenge_entity') in ['pre_heat','pre_cold','reduction','appreciation'] }}"
+      - "recovery"
 
 variables:
   do_pre_heat: !input do_pre_heat
@@ -196,6 +195,7 @@ variables:
   bool_ref_other_light: !input bool_ref_other_light
   challenge_am: !input challenge_am
   challenge_pm: !input challenge_pm
+  bool_challenge_temp: !input bool_challenge_temp
 
 action:
   - choose:
@@ -340,11 +340,19 @@ action:
                                 entity_id: !input default_challenge_entity
                                 state: "on"
                         sequence:
-                          - service: climate.set_temperature
-                            data:
-                              temperature: !input challenge_temp
-                            target:
-                              entity_id: !input thermostats
+                          - choose:
+                              - conditions:
+                                  - "{{ bool_challenge_temp | bool }}"
+                                sequence:
+                                  - service: climate.turn_off
+                                    target:
+                                      entity_id: !input thermostats
+                                default:
+                                  - service: climate.set_temperature
+                                    data:
+                                      temperature: !input challenge_temp
+                                    target:
+                                      entity_id: !input thermostats
                           - choose:
                               - conditions: "{{ water_heater is not none and water_heater | length > 0 and none not in water_heater}}"
                                 sequence:
