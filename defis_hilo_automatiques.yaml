@@ -163,6 +163,14 @@ blueprint:
           min: 15
           max: 25
           unit_of_measurement: °C
+
+    bool_challenge_temp:
+      name: Eteindre les thermostats durant défis
+      description: Désactive les thermostats durant la phase de réducition au lieu de réduire la température (True)
+      default: false
+      selector:
+        boolean:
+
 triggers:
   - trigger: time_pattern
     hours: "*"
@@ -187,6 +195,7 @@ variables:
   bool_ref_other_light: !input bool_ref_other_light
   challenge_am: !input challenge_am
   challenge_pm: !input challenge_pm
+  bool_challenge_temp: !input bool_challenge_temp
 
 action:
   - choose:
