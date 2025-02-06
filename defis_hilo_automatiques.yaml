@@ -58,7 +58,7 @@ blueprint:
           
     other_devices_light:
       name: Autres équipements types LIGHT (optionnel)
-      description: Désactive d'autres équipements LIGHT durant les défis et/ou les phases d'appréciation de référence
+      description: Désactive d'autres équipements LIGHT durant les défis et/ou les phases d'appréciation de référence (ATTENTION LES LUMIERES SE RALLUMERONT APRES LES DEFIS)
       default: null
       selector:
         entity:
