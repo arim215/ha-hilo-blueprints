@@ -155,7 +155,7 @@ blueprint:
 
     challenge_temp:
       name: Température de défi
-      description: Température lors des défis (le plus bas possible)
+      description: Température lors des défis (le plus bas possible) (Ne sera pas pris en compte si "Eteindre les thermostats durant défis" est activé)
       default: 17
       selector:
         number:
