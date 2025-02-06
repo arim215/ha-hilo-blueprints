@@ -155,7 +155,7 @@ blueprint:
 
     challenge_temp:
       name: Température de défi
-      description: Température lors des défis (le plus bas possible) (n'est pas pris en compte si "Eteindre les thermostats durant défis" est activé)
+      description: Température lors des défis (le plus bas possible)
       default: 17
       selector:
         number:
@@ -163,14 +163,6 @@ blueprint:
           min: 15
           max: 25
           unit_of_measurement: °C
-
-    bool_challenge_temp:
-      name: Eteindre les thermostats durant défis
-      description: Désactive les thermostats durant la phase de réducition au lieu de réduire la température (True)
-      default: false
-      selector:
-        boolean:
-
 triggers:
   - trigger: time_pattern
     hours: "*"
@@ -195,7 +187,6 @@ variables:
   bool_ref_other_light: !input bool_ref_other_light
   challenge_am: !input challenge_am
   challenge_pm: !input challenge_pm
-  bool_challenge_temp: !input bool_challenge_temp
 
 action:
   - choose:
@@ -240,7 +231,7 @@ action:
                             target:
                               entity_id: !input thermostats
                           - choose:
-                              - conditions: "{{ water_heater is not none and water_heater | length > 0 and none not in water_heater }}"
+                              - conditions: "{{ water_heater is not none }}"
                                 sequence:
                                   - service: switch.turn_on
                                     target:
@@ -264,7 +255,7 @@ action:
                         target:
                           entity_id: !input thermostats
                       - choose:
-                          - conditions: "{{ water_heater is not none and water_heater | length > 0 and none not in water_heater }}"
+                          - conditions: "{{ water_heater is not none }}"
                             sequence:
                               - service: switch.turn_on
                                 target:
@@ -295,7 +286,7 @@ action:
                       entity_id: !input thermostats
                   - choose:
                       - conditions:
-                          - "{{ water_heater is not none and water_heater | length > 0 and none not in water_heater }}"
+                          - "{{ water_heater is not none }}"
                           - "{{ bool_ref_water_heater | bool }}"
                         sequence:
                           - service: switch.turn_off
@@ -340,21 +331,13 @@ action:
                                 entity_id: !input default_challenge_entity
                                 state: "on"
                         sequence:
+                          - service: climate.set_temperature
+                            data:
+                              temperature: !input challenge_temp
+                            target:
+                              entity_id: !input thermostats
                           - choose:
-                              - conditions:
-                                  - "{{ bool_challenge_temp | bool }}"
-                                sequence:
-                                  - service: climate.turn_off
-                                    target:
-                                      entity_id: !input thermostats
-                                default:
-                                  - service: climate.set_temperature
-                                    data:
-                                      temperature: !input challenge_temp
-                                    target:
-                                      entity_id: !input thermostats
-                          - choose:
-                              - conditions: "{{ water_heater is not none and water_heater | length > 0 and none not in water_heater}}"
+                              - conditions: "{{ water_heater is not none }}"
                                 sequence:
                                   - service: switch.turn_off
                                     target:
@@ -379,7 +362,7 @@ action:
                         target:
                           entity_id: !input thermostats
                       - choose:
-                          - conditions: "{{ water_heater is not none and water_heater | length > 0 and none not in water_heater }}"
+                          - conditions: "{{ water_heater is not none }}"
                             sequence:
                               - service: switch.turn_on
                                 target:
@@ -422,7 +405,7 @@ action:
                             target:
                               entity_id: !input thermostats
                           - choose:
-                              - conditions: "{{ water_heater is not none and water_heater | length > 0 and none not in water_heater }}"
+                              - conditions: "{{ water_heater is not none }}"
                                 sequence:
                                   - service: switch.turn_on
                                     target:
@@ -446,7 +429,7 @@ action:
                         target:
                           entity_id: !input thermostats
                       - choose:
-                          - conditions: "{{ water_heater is not none and water_heater | length > 0 and none not in water_heater }}"
+                          - conditions: "{{ water_heater is not none }}"
                             sequence:
                               - service: switch.turn_on
                                 target:
@@ -471,7 +454,7 @@ action:
                 target:
                   entity_id: !input thermostats
               - choose:
-                  - conditions: "{{ water_heater is not none and water_heater | length > 0 and none not in water_heater }}"
+                  - conditions: "{{ water_heater is not none }}"
                     sequence:
                       - service: switch.turn_on
                         target:
@@ -496,7 +479,7 @@ action:
         target:
           entity_id: !input thermostats
       - choose:
-          - conditions: "{{ water_heater is not none and water_heater | length > 0 and none not in water_heater }}"
+          - conditions: "{{ water_heater is not none }}"
             sequence:
               - service: switch.turn_on
                 target:
