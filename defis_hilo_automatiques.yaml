@@ -55,16 +55,6 @@ blueprint:
         entity:
           domain: switch
           multiple: true
-          
-    #other_devices_light:
-      #name: Autres équipements types LIGHT (optionnel)
-      #description: Désactive d'autres équipements LIGHT durant les défis et/ou les phases d'appréciation de référence (ATTENTION LES LUMIERES SE RALLUMERONT APRES LES DEFIS)
-      #default: null
-      #selector:
-        #entity:
-          #domain: light
-          #multiple: true
-
 
     bool_ref_water_heater:
       name: Chauffe eau - Défis seulement ou Refroidissment et Défis
@@ -79,13 +69,6 @@ blueprint:
       default: false
       selector:
         boolean:
-    
-    #bool_ref_other_light:
-      #name: Autres Équipements - Défis seulement ou Refroidissment et Défis
-      #description: Désactive les autres équipements durant les défis seulement (False) ou désactiver durant la phase de refroidissement, puis réactivation durant la phase d'appréciation avec de désactiver pour les défis (True)
-      #default: false
-      #selector:
-        #boolean:
 
     normal_temp:
       name: Température normale
@@ -189,10 +172,8 @@ variables:
   do_pre_heat: !input do_pre_heat
   water_heater: !input water_heater
   other_devices_switch: !input other_devices_switch
-  #other_devices_light: !input other_devices_light
   bool_ref_water_heater: !input bool_ref_water_heater
   bool_ref_other_switch: !input bool_ref_other_switch
-  #bool_ref_other_light: !input bool_ref_other_light
   challenge_am: !input challenge_am
   challenge_pm: !input challenge_pm
   bool_challenge_temp: !input bool_challenge_temp
@@ -217,6 +198,7 @@ action:
 
         sequence:
           - choose:
+              #Condition d'APPRECIATION ou de REF-APPRECIATION#
               - conditions:
                   - condition: or
                     conditions:
@@ -228,7 +210,6 @@ action:
                         before: "15:00:00"
                 sequence:
                   - choose:
-                      #Condition d'APPRECIATION ou de REF-APPRECIATION#
                       - conditions:
                           - condition: state
                             entity_id: !input default_challenge_entity
@@ -251,12 +232,6 @@ action:
                                   - service: switch.turn_on
                                     target:
                                       entity_id: !input other_devices_switch
-                          #- choose:
-                              #- conditions: "{{ other_devices_light is not none and other_devices_light | length > 0 and none not in other_devices_light }}"
-                                #sequence:
-                                  #- service: light.turn_on
-                                    #target:
-                                      #entity_id: !input other_devices_light
                     default:
                       - service: climate.set_temperature
                         data:
@@ -275,12 +250,6 @@ action:
                               - service: switch.turn_on
                                 target:
                                   entity_id: !input other_devices_switch
-                      #- choose:
-                          #- conditions: "{{ other_devices_light is not none and other_devices_light | length > 0 and none not in other_devices_light }}"
-                            #sequence:
-                              #- service: light.turn_on
-                                #target:
-                                  #entity_id: !input other_devices_light
 
               #Condition de PRE-COLD si active dans l'integration Hilo#
               - conditions:
@@ -309,14 +278,6 @@ action:
                           - service: switch.turn_off
                             target:
                               entity_id: !input other_devices_switch
-                  #- choose:
-                      #- conditions:
-                          #- "{{ other_devices_light is not none and other_devices_light | length > 0 and none not in other_devices_light }}"
-                          #- "{{ bool_ref_other_light | bool }}"
-                        #sequence:
-                          #- service: light.turn_off
-                            #target:
-                              #entity_id: !input other_devices_light
 
               # Condition de REF-REDUCTION ou REDUCTION (DEFI)#
               - conditions:
@@ -369,13 +330,6 @@ action:
                                   - service: switch.turn_off
                                     target:
                                       entity_id: !input other_devices_switch
-                          #- choose:
-                              #- conditions: "{{ other_devices_light is not none and other_devices_light | length > 0 and none not in other_devices_light }}"
-                                #sequence:
-                                  #- service: light.turn_off
-                                    #target:
-                                      #entity_id: !input other_devices_light
-              
                     default:
                       - service: climate.set_temperature
                         data:
@@ -394,13 +348,6 @@ action:
                               - service: switch.turn_on
                                 target:
                                   entity_id: !input other_devices_switch
-                      #- choose:
-                          #- conditions: "{{ other_devices_light is not none and other_devices_light | length > 0 and none not in other_devices_light }}"
-                            #sequence:
-                              #- service: light.turn_on
-                                #target:
-                                  #entity_id: !input other_devices_light
-
 
               #Condition de PRE-HEAT si active#
               - conditions:
@@ -438,12 +385,6 @@ action:
                                   - service: switch.turn_on
                                     target:
                                       entity_id: !input other_devices_switch
-                          #- choose:
-                              #- conditions: "{{ other_devices_light is not none and other_devices_light | length > 0 and none not in other_devices_light }}"
-                                #sequence:
-                                  #- service: light.turn_on
-                                    #target:
-                                      #entity_id: !input other_devices_light
                     default:
                       - service: climate.set_temperature
                         data:
@@ -462,12 +403,6 @@ action:
                               - service: switch.turn_on
                                 target:
                                   entity_id: !input other_devices_switch
-                      #- choose:
-                          #- conditions: "{{ other_devices_light is not none and other_devices_light | length > 0 and none not in other_devices_light }}"
-                            #sequence:
-                              #- service: light.turn_on
-                                #target:
-                                  #entity_id: !input other_devices_light
 
             default:
               - service: climate.set_temperature
@@ -487,12 +422,6 @@ action:
                       - service: switch.turn_on
                         target:
                           entity_id: !input other_devices_switch
-              #- choose:
-                  #- conditions: "{{ other_devices_light is not none and other_devices_light | length > 0 and none not in other_devices_light }}"
-                    #sequence:
-                      #- service: light.turn_on
-                        #target:
-                          #entity_id: !input other_devices_light
 
     default:
       - service: climate.set_temperature
@@ -512,9 +441,3 @@ action:
               - service: switch.turn_on
                 target:
                   entity_id: !input other_devices_switch
-      #- choose:
-          #- conditions: "{{ other_devices_light is not none and other_devices_light | length > 0 and none not in other_devices_light }}"
-            #sequence:
-              #- service: light.turn_on
-                #target:
-                  #entity_id: !input other_devices_light
