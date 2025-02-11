@@ -45,7 +45,7 @@ blueprint:
       selector:
         entity:
           domain: switch
-          #multiple: true
+          multiple: true
 
     other_devices_switch:
       name: Autres équipements types SWITCH (optionnel)
