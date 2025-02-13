@@ -413,6 +413,11 @@ action:
                     - service: climate.turn_on
                       target:
                         entity_id: !input thermostats
+                    - service: climate.set_hvac_mode
+                      data:
+                        hvac_mode: heat
+                      target:
+                        entity_id: !input thermostats
                     - service: climate.set_temperature
                       data:
                         temperature: !input normal_temp
@@ -447,6 +452,11 @@ action:
               value_template: "{{ bool_challenge_temp | bool }}"
           sequence:
             - service: climate.turn_on
+              target:
+                entity_id: !input thermostats
+            - service: climate.set_hvac_mode
+              data:
+                hvac_mode: heat
               target:
                 entity_id: !input thermostats
             - service: climate.set_temperature
