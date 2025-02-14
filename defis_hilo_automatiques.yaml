@@ -405,9 +405,9 @@ action:
                                   entity_id: !input other_devices_switch
 
             default:
-              - service: climate.turn_on
-                target:
-                  entity_id: !input thermostats
+              #- service: climate.turn_on
+                #target:
+                  #entity_id: !input thermostats
               - service: climate.set_hvac_mode
                 data:
                   hvac_mode: heat
@@ -432,9 +432,9 @@ action:
                           entity_id: !input other_devices_switch
 
     default:
-      - service: climate.turn_on
-        target:
-          entity_id: !input thermostats
+      #- service: climate.turn_on
+        #target:
+          #entity_id: !input thermostats
       - service: climate.set_hvac_mode
         data:
           hvac_mode: heat
