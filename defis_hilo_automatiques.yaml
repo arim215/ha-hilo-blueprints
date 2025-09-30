@@ -207,7 +207,7 @@ action:
                         before: "04:00:00"
                       - condition: time
                         after: "12:00:00"
-                        before: "15:00:00"
+                        before: "14:00:00"
                 sequence:
                   - choose:
                       - conditions:
