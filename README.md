@@ -1,5 +1,3 @@
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Farim215%2Fha-hilo-blueprints&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Visits&edge_flat=false)](https://hits.seeyoufarm.com)
-
 # Blueprints pour les défis Hilo  
 Blueprint pour Home Assistant permettant d'utiliser l'intégration Hilo facilement. Vous pourrez automatiser la température cible de vos thermostats pour maximiser vos récompenses Hilo. Vous avez également la possibilité de participer aux défis du matin et/ou du soir.  
 
