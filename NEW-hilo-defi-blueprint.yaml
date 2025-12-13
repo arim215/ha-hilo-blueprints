@@ -109,6 +109,10 @@ blueprint:
 trigger:
   - platform: state
     entity_id: !input default_challenge_entity
+  - trigger: time
+    at: "06:45:00"
+  - trigger: time
+    at: "19:00:00"
 
 variables:
   # Entité & état du défi
