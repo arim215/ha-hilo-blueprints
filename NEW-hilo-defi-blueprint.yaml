@@ -115,10 +115,11 @@ blueprint:
 trigger:
   - platform: state
     entity_id: !input default_challenge_entity
-  - platform: time
-    at: "06:45:00"
-  - platform: time
-    at: "19:00:00"
+    to:
+      - 'pre_heat'
+      - 'reduction'
+      - 'appreciation'
+      - 'recovery'
 
 variables:
   # Entité & état du défi
