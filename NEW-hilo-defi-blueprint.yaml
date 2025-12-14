@@ -79,6 +79,12 @@ blueprint:
           unit_of_measurement: °C
 
     # Flags
+    do_appreciation:
+      name: Activer Appreciation
+      default: true
+      selector:
+        boolean: {}
+
     do_pre_heat:
       name: Activer Pré-chauffage
       default: true
@@ -120,6 +126,7 @@ variables:
   # Sélection utilisateur (flags)
   challenge_am_flag: !input challenge_am
   challenge_pm_flag: !input challenge_pm
+  do_appreciation_flag: !input do_appreciation
   do_pre_heat_flag: !input do_pre_heat
   shut_thermostat_flag: !input bool_shut_thermostat
 
@@ -222,7 +229,7 @@ action:
       # ---------- Appréciation ----------
       - conditions:
           - condition: template
-            value_template: "{{ challenge_state == 'appreciation' and window_ok }}"
+            value_template: "{{ challenge_state == 'appreciation' and do_appreciation_flag and window_ok }}"
         sequence:
           - service: climate.set_temperature
             target:
