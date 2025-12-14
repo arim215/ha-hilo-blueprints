@@ -145,7 +145,7 @@ variables:
     {% elif challenge_state == 'reduction' %}
       {{ (hour >= 6) and (hour < 10) }}
     {% elif challenge_state == 'appreciation' %}
-      {{ (hour >= 1) and (hour < 3) }}
+      {{ (hour >= 1) and (hour < 4) }}
     {% else %}
       false
     {% endif %}
@@ -157,7 +157,7 @@ variables:
     {% elif challenge_state == 'reduction' %}
       {{ (hour >= 16) and (hour < 20) }}
     {% elif challenge_state == 'appreciation' %}
-      {{ (hour >= 12) and (hour < 14) }}
+      {{ (hour >= 11) and (hour < 14) }}
     {% else %}
       false
     {% endif %}
