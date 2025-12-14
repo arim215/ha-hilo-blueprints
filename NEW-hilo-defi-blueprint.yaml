@@ -139,6 +139,24 @@ variables:
   water_heater_count: "{{ (water_heater_switch_var | default([], true)) | count }}"
   other_devices_count: "{{ (other_devices_switch_var | default([], true)) | count }}"
 
+#### A TESTER #####
+
+  #hilo_events: >
+  #  {{ state_attr(default_challenge_entity, 'next_events') | default([], true) }}
+
+  #hilo_next_period: >
+  #  {{ hilo_events[0].period if hilo_events | length > 0 else 'none' }}
+
+  #hilo_current_state: >
+  #  {{ hilo_events[0].state if hilo_events | length > 0 else 'none' }}
+  #is_am_window: >
+  #  {{ hilo_next_period == 'am' }}
+
+  #is_pm_window: >
+  #  {{ hilo_next_period == 'pm' }}
+
+
+
   # Heure courante (locale HA)
   hour: "{{ now().hour }}"
 
