@@ -133,7 +133,6 @@ variables:
   shut_thermostat_flag: !input bool_shut_thermostat
 
   # Cibles
-  challenge_thermostats_var: !input challenge_thermostats
   water_heater_switch_var: !input water_heater_switch
   other_devices_switch_var: !input other_devices_switch
 
