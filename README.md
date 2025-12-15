@@ -27,6 +27,9 @@ Installez les Blueprints avec ces liens. Je recommande la nouvelle version du bl
 - Nouveau défis automatiques  simplifié:  
   [![Importer le Blueprint](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fraw.githubusercontent.com%2Farim215%2Fha-hilo-blueprints%2Fmain%2FNEW-hilo-defi-blueprint.yaml)  
 
+-TEST Automatisation basé sur les "attributes" de defi_hilo sensor:
+  [![Importer le Blueprint](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fraw.githubusercontent.com%2Farim215%2Fha-hilo-blueprints%2Fmain%2FNattributes-hilo-defi.yaml)  
+
 - Défis automatiques *ARCHIVE - à ne plus utiliser*:  
   [![Importer le Blueprint](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fraw.githubusercontent.com%2Farim215%2Fha-hilo-blueprints%2Fmain%2Fdefis_hilo_automatiques.yaml)  
 
