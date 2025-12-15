@@ -226,7 +226,7 @@ action:
             data:
               temperature: !input appreciation_temp
 
-      # ---------- Récupération (toujours autorisée) ----------
+      # ---------- Récupération  ----------
       - conditions:
           - condition: template
             value_template: "{{ challenge_state == 'recovery' and window_ok }}"
