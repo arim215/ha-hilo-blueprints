@@ -1,4 +1,4 @@
-#v1.1
+#v1.2
 
 blueprint:
   name: Défis Hilo – Automatisation simplifiée (Ari Version)
@@ -258,14 +258,21 @@ action:
             data:
               temperature: !input appreciation_temp
 
-      # ---------- Récupération : remise à la normale ----------
+            # ---------- Récupération : remise à la normale ----------
       - conditions:
           - condition: template
             value_template: "{{ challenge_state == 'recovery' and window_ok }}"
         sequence:
-          - service: climate.turn_on
-            target:
-              entity_id: !input challenge_thermostats
+          # Si les thermostats ont été fermés, les rallumer
+          - if:
+              - condition: template
+                value_template: "{{ shut_thermostat_flag }}"
+            then:
+              - service: climate.turn_on
+                target:
+                  entity_id: !input challenge_thermostats
+
+          # Toujours remettre la température normale
           - service: climate.set_temperature
             target:
               entity_id: !input challenge_thermostats
@@ -289,4 +296,5 @@ action:
               - service: switch.turn_on
                 target:
                   entity_id: !input other_devices_switch
+
 mode: restart
