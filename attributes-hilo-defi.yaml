@@ -141,9 +141,11 @@ variables:
 
   # Cibles
   switch_devices_var: !input switch_devices
+  automations_interrupts_var: !input automations_interrupts
 
   # Comptages sécurisés
   switch_devices_count: "{{ (switch_devices_var | default([], true)) | count }}"
+  automations_interrupts_count: "{{ (automations_interrupts_var | default([], true)) | count }}"
 
   hilo_next_period: "{{ state_attr('sensor.defi_hilo', 'next_events')[0].period }}"
 
@@ -201,6 +203,15 @@ action:
                 target:
                   entity_id: !input switch_devices
 
+          - if:
+              - condition: template
+                value_template: "{{ automations_interrupts_count > 0 }}"
+            then:
+              - service: automation.turn_off
+                target:
+                  entity_id: !input automations_interrupts
+
+
       # ---------- Appréciation ----------
       - conditions:
           - condition: template
@@ -237,5 +248,13 @@ action:
               - service: switch.turn_on
                 target:
                   entity_id: !input switch_devices
+
+          - if:
+              - condition: template
+                value_template: "{{ automations_interrupts_count > 0 }}"
+            then:
+              - service: automation.turn_on
+                target:
+                  entity_id: !input automations_interrupts
 
 mode: restart
