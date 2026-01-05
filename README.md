@@ -24,13 +24,13 @@ Vous aurez besoin de l'intégration [Hilo](https://github.com/dvd-dev/hilo) pour
 Installez les Blueprints avec ces liens. Je recommande la nouvelle version du blueprint, car elle est plus simple. L'ancienne version n'est plus vraiment supporté et elle contient des "bug" quand on selectionne seulement une seul periode de défis et/ou quand on a plusieurs automate pour les mêmes thermostats (soit un pour AM et un pour PM).  
 
 
-- Nouveau défis automatiques  simplifié:
-  
-  [![Importer le Blueprint](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fraw.githubusercontent.com%2Farim215%2Fha-hilo-blueprints%2Fmain%2FNEW-hilo-defi-blueprint.yaml)  
-
-- TEST Automatisation basé sur les "attributes" de defi_hilo sensor:
+- Automatisation basé sur les "attributes" de defi_hilo sensor:
   
   [![Importer le Blueprint](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fraw.githubusercontent.com%2Farim215%2Fha-hilo-blueprints%2Fmain%2Fattributes-hilo-defi.yaml)  
+
+- Nouveau défis automatiques  simplifié *ARCHIVE - à ne plus utiliser*:
+  
+  [![Importer le Blueprint](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fraw.githubusercontent.com%2Farim215%2Fha-hilo-blueprints%2Fmain%2FNEW-hilo-defi-blueprint.yaml)  
 
 - Défis automatiques *ARCHIVE - à ne plus utiliser*:
   
