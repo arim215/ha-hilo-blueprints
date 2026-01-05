@@ -23,7 +23,7 @@ blueprint:
     
     switch_devices:
       name: Interrupteur (optionnel)
-      description: Permet de à désactive les équipements types SWITCH durant les défis et les phases d'appréciation de référence
+      description: Permet de à désactive les équipements types SWITCH durant les défis et les phases d'appréciation de référence (Chauffe-Eau ou autres)
       default: []
       selector:
         entity:
