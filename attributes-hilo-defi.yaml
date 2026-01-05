@@ -141,14 +141,14 @@ variables:
   water_heater_count: "{{ (water_heater_switch_var | default([], true)) | count }}"
   other_devices_count: "{{ (other_devices_switch_var | default([], true)) | count }}"
 
-  # Données Hilo (sécurisées)
-  hilo_events: >
-    {{ state_attr(challenge_entity, 'next_events') | default([], true) }}
+  # Données Hilo 
+  #hilo_events: >
+  #  {{ state_attr(challenge_entity, 'next_events') | default([], true) }}
 
-  hilo_next_period: >
-    {{ hilo_events[0].period
-       if hilo_events | length > 0 and 'period' in hilo_events[0]
-       else 'none' }}
+  hilo_next_period: "{{ state_attr('sensor.defi_hilo', 'next_events')[0].period }}"
+  #  {{ hilo_events[0].period
+  #     if hilo_events | length > 0 and 'period' in hilo_events[0]
+  #     else 'none' }}
 
   is_am_window: "{{ hilo_next_period == 'am' }}"
   is_pm_window: "{{ hilo_next_period == 'pm' }}"
