@@ -231,16 +231,20 @@ action:
           - condition: template
             value_template: "{{ challenge_state == 'recovery' and window_ok }}"
         sequence:
-          - service: climate.turn_on
-            target:
-              entity_id: !input challenge_thermostats
-
-          - service: climate.set_temperature
-            target:
-              entity_id: !input challenge_thermostats
-            data:
-              temperature: !input normal_temp
-
+          - if:
+              - condition: template
+                value_template: "{{ shut_thermostat_flag }}"
+            then:
+              - service: climate.turn_on
+                target:
+                  entity_id: !input challenge_thermostats
+            else:
+              - service: climate.set_temperature
+                target:
+                  entity_id: !input challenge_thermostats
+                data:
+                  temperature: !input normal_temp
+       
           - if:
               - condition: template
                 value_template: "{{ switch_devices_count > 0 }}"
