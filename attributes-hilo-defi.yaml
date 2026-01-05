@@ -99,7 +99,7 @@ blueprint:
 
     bool_shut_thermostat:
       name: Fermer thermostats pendant réduction
-      description: Éteint les thermostats au lieu de régler une température
+      description: Éteint les thermostats au lieu de régler une température (selectionner seulement si le thermostat supporte hvac_mode:off)
       default: false
       selector:
         boolean: {}
@@ -185,9 +185,11 @@ action:
               - condition: template
                 value_template: "{{ shut_thermostat_flag }}"
             then:
-              - service: climate.turn_off
+              - service: climate.set_hvac_mode
                 target:
                   entity_id: !input challenge_thermostats
+                data:
+                  hvac_mode: "off"
             else:
               - service: climate.set_temperature
                 target:
