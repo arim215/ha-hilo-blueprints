@@ -21,16 +21,9 @@ blueprint:
     #-  required: true
     # Rend la sélection obligatoire (supprime les listes vides)
     
-    water_heater_switch:
-      name: Interrupteur Chauffe-eau (optionnel)
-      default: []
-      selector:
-        entity:
-          domain: switch
-          multiple: true
-
-    other_devices_switch:
-      name: Autres appareils à couper (optionnel)
+    switch_devices:
+      name: Interrupteur (optionnel)
+      description: Permet de à désactive les équipements types SWITCH durant les défis et les phases d'appréciation de référence
       default: []
       selector:
         entity:
@@ -134,12 +127,10 @@ variables:
   shut_thermostat_flag: !input bool_shut_thermostat
 
   # Cibles
-  water_heater_switch_var: !input water_heater_switch
-  other_devices_switch_var: !input other_devices_switch
+  switch_devices_var: !input switch_devices
 
   # Comptages sécurisés
-  water_heater_count: "{{ (water_heater_switch_var | default([], true)) | count }}"
-  other_devices_count: "{{ (other_devices_switch_var | default([], true)) | count }}"
+  switch_devices_count: "{{ (switch_devices_var | default([], true)) | count }}"
 
   # Données Hilo 
   #hilo_events: >
@@ -198,19 +189,11 @@ action:
 
           - if:
               - condition: template
-                value_template: "{{ water_heater_count > 0 }}"
+                value_template: "{{ switch_devices_count > 0 }}"
             then:
               - service: switch.turn_off
                 target:
-                  entity_id: !input water_heater_switch
-
-          - if:
-              - condition: template
-                value_template: "{{ other_devices_count > 0 }}"
-            then:
-              - service: switch.turn_off
-                target:
-                  entity_id: !input other_devices_switch
+                  entity_id: !input switch_devices
 
       # ---------- Appréciation ----------
       - conditions:
@@ -243,18 +226,10 @@ action:
 
           - if:
               - condition: template
-                value_template: "{{ water_heater_count > 0 }}"
+                value_template: "{{ switch_devices_count > 0 }}"
             then:
               - service: switch.turn_on
                 target:
-                  entity_id: !input water_heater_switch
-
-          - if:
-              - condition: template
-                value_template: "{{ other_devices_count > 0 }}"
-            then:
-              - service: switch.turn_on
-                target:
-                  entity_id: !input other_devices_switch
+                  entity_id: !input switch_devices
 
 mode: restart
