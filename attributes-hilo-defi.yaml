@@ -261,4 +261,8 @@ action:
                 target:
                   entity_id: !input automations_interrupts
 
+              - service: automation.trigger
+                target:
+                  entity_id: !input automations_interrupts
+
 mode: restart
