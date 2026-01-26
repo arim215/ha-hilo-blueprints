@@ -168,11 +168,21 @@ action:
                  and do_pre_heat_flag
                  and window_ok }}
         sequence:
-          - service: climate.set_temperature
-            target:
-              entity_id: !input challenge_thermostats
-            data:
-              temperature: !input pre_heat_temp
+          - if:
+              - condition: template
+                value_template: "{{ do_pre_heat_flag }}"
+            then:
+              - service: climate.set_temperature
+                target:
+                  entity_id: !input challenge_thermostats
+                data:
+                  temperature: !input pre_heat_temp
+            else:
+              - service: climate.set_temperature
+                target:
+                  entity_id: !input challenge_thermostats
+                data:
+                  temperature: !input normal_temp
 
       # ---------- Réduction ----------
       - conditions:
