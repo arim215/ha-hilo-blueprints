@@ -165,7 +165,6 @@ action:
           - condition: template
             value_template: >
               {{ challenge_state == 'pre_heat'
-                 and do_pre_heat_flag
                  and window_ok }}
         sequence:
           - if:
@@ -183,6 +182,7 @@ action:
                   entity_id: !input challenge_thermostats
                 data:
                   temperature: !input normal_temp
+
 
       # ---------- Réduction ----------
       - conditions:
